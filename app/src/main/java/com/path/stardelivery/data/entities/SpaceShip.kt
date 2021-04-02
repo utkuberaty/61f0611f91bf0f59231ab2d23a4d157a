@@ -5,11 +5,12 @@ import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
 
 @Serializable
-@Entity(tableName = "station")
+@Entity(tableName = "spaceShip")
 data class SpaceShip(
     @PrimaryKey val name: String = "",
     val speed: Int,
     val capacity: Int,
     val stability: Int,
-    val currentLocation: Pair<Double,Double> = 0.0 to 0.0
+    val currentLocationX: Double = 0.0,
+    val currentLocationY: Double = 0.0
 )
