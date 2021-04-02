@@ -11,5 +11,5 @@ data class SpaceShip(
     val speed: Int,
     val capacity: Int,
     val stability: Int,
-    val location: Pair<Double,Double> = 0.0 to 0.0
+    val currentLocation: Pair<Double,Double> = 0.0 to 0.0
 )
