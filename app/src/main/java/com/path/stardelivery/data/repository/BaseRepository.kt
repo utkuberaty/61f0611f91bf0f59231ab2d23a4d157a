@@ -11,18 +11,24 @@ open class BaseRepository {
         networkCall: (suspend () -> Result<T>)? = null,
         saveCallResult: (suspend (T) -> Unit)? = null
     ) = liveData(Dispatchers.IO) {
-        emit(Result.Loading())
-        val source = Result.Success(databaseQuery.invoke())
-        emit(source)
 
-        if (networkCall != null) {
-            when(val responseStatus = networkCall.invoke()) {
-                is Result.Success -> saveCallResult?.invoke(responseStatus.data!!)
+        val source = Result.Success(databaseQuery.invoke())
+
+        val isDataNull = when (source.data) {
+            is List<*> -> source.data.isNullOrEmpty()
+            else -> source.data == null
+        }
+
+        if (isDataNull && networkCall != null) {
+            when (val responseStatus = networkCall.invoke()) {
+                is Result.Success -> {
+                    saveCallResult?.invoke(responseStatus.data!!)
+                    emit(Result.Success(responseStatus.data!!))
+                }
                 is Result.Error -> {
                     emit(Result.Error(responseStatus.code, responseStatus.exception))
-                    emit(source)
                 }
             }
-        }
+        } else emit(source)
     }
 }

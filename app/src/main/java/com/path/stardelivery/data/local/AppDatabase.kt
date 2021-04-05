@@ -2,6 +2,9 @@ package com.path.stardelivery.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.RoomMasterTable.TABLE_NAME
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.path.stardelivery.data.entities.SpaceShip
 import com.path.stardelivery.data.entities.Station
 

@@ -2,15 +2,19 @@ package com.path.stardelivery.data.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import kotlinx.serialization.Serializable
 
 @Serializable
 @Entity(tableName = "spaceShip")
 data class SpaceShip(
-    @PrimaryKey val name: String = "",
-    val speed: Int,
-    val capacity: Int,
-    val stability: Int,
-    val currentLocationX: Double = 0.0,
-    val currentLocationY: Double = 0.0
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+    val name: String = "",
+    val speed: Long = 0,
+    val capacity: Long = 0,
+    val stability: Long = 0,
+    val health: Int = 100,
+    @TypeConverters(Station::class)
+    val currentStationId: Int = 1
 )

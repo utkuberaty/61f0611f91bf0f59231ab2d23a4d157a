@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_station"
+        android:enabled="true"
+        android:icon="@drawable/ic_rocket"
+        android:title="@string/stations"/>
+
+    <item
+        android:id="@+id/nav_favourites"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_star"
+        android:title="@string/favourites"/>
+</menu>

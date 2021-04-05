@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Star Delivery</string>
+    <string name="favourites">Favourites</string>
+    <string name="stations">Stations</string>
+    <string name="spaceship_point">Spaceship Point:</string>
+    <string name="spaceship_name">Spaceship Name</string>
+    <string name="stability">Stability</string>
+    <string name="speed">Speed</string>
+    <string name="capacity">Capacity</string>
+    <string name="continue_bt">Continue</string>
+    <string name="travel">Travel</string>
+    <string name="current_station_name">Current Station Name</string>
 </resources>

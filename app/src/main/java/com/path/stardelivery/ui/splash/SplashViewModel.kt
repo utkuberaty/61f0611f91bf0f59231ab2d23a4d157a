@@ -1,16 +1,15 @@
-package com.path.stardelivery.ui.create_ship
+package com.path.stardelivery.ui.splash
 
 import androidx.lifecycle.ViewModel
-import com.path.stardelivery.data.entities.SpaceShip
 import com.path.stardelivery.data.repository.SpaceShipRepository
 import com.path.stardelivery.data.repository.StationRepository
 
-class CreateShipViewModel(
+class SplashViewModel(
     private val spaceShipRepository: SpaceShipRepository,
     private val stationRepository: StationRepository
 ) : ViewModel() {
 
-    fun saveSpaceship(spaceShip: SpaceShip) = spaceShipRepository.insertSpaceShip(spaceShip)
+    suspend fun getSpaceShip() = spaceShipRepository.getSpaceShip()
+    fun getStation() = stationRepository.getAllStations()
 
-    fun getAllStations() = stationRepository.getAllStations()
 }

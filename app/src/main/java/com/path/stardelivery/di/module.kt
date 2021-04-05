@@ -5,11 +5,14 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import com.path.stardelivery.data.local.AppDatabase
 import com.path.stardelivery.data.remote.RemoteDataSource
 import com.path.stardelivery.data.remote.StationsService
+import com.path.stardelivery.data.repository.SpaceShipRepository
 import com.path.stardelivery.data.repository.StationRepository
 import com.path.stardelivery.ui.create_ship.CreateShipViewModel
 import com.path.stardelivery.ui.home.HomeViewModel
 import com.path.stardelivery.ui.home.favourites.FavouritesViewModel
 import com.path.stardelivery.ui.home.stations.StationsViewModel
+import com.path.stardelivery.ui.root.RootViewModel
+import com.path.stardelivery.ui.splash.SplashViewModel
 import com.path.stardelivery.util.HOST
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -20,7 +23,6 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
-
 
 val networkModule = module {
 
@@ -70,11 +72,14 @@ val dataModule = module {
 
 val repositoryModule = module {
     single { StationRepository(get(), get()) }
+    single { SpaceShipRepository(get()) }
 }
 
 val viewModelModule = module {
+    viewModel { RootViewModel() }
+    viewModel { SplashViewModel(get(), get()) }
     viewModel { HomeViewModel() }
-    viewModel { StationsViewModel() }
-    viewModel { FavouritesViewModel() }
-    viewModel { CreateShipViewModel() }
+    viewModel { StationsViewModel(get(), get()) }
+    viewModel { FavouritesViewModel(get()) }
+    viewModel { CreateShipViewModel(get(), get()) }
 }

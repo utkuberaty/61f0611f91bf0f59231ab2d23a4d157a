@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_navigation"
+    app:startDestination="@id/nav_station">
+
+    <fragment
+        android:id="@+id/nav_station"
+        android:name="com.path.stardelivery.ui.home.stations.StationsFragment"
+        android:label="StationsFragment"
+        tools:layout="@layout/fragment_stations"/>
+    <fragment
+        android:id="@+id/nav_favourites"
+        android:name="com.path.stardelivery.ui.home.favourites.FavouritesFragment"
+        android:label="FavouritesFragment"
+        tools:layout="@layout/fragment_favourites"/>
+</navigation>

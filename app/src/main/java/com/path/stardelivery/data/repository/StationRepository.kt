@@ -1,5 +1,6 @@
 package com.path.stardelivery.data.repository
 
+import androidx.lifecycle.liveData
 import com.path.stardelivery.data.local.StarDeliveryDao
 import com.path.stardelivery.data.remote.RemoteDataSource
 
@@ -11,11 +12,19 @@ class StationRepository(
     fun getAllStations() = performGetOperation(
         { localDataSource.getAllStations() },
         { remoteDataSource.getAllStations() },
-        { localDataSource.insertAll(it) }
+        { localDataSource.insertAllStations(it) }
     )
 
-    fun getStation(name: String) = performGetOperation(
-        { localDataSource.getStation(name) }
-    )
+    fun favoriteStations() = performGetOperation({ localDataSource.getFavouriteStations() })
 
+    suspend fun updateStationFavourite(id: Int, isFavourite: Boolean) =
+        localDataSource.updateStationFavourite(id, isFavourite)
+
+    fun getStation(name: String) = performGetOperation({ localDataSource.getStation(name) })
+
+    suspend fun updateStationNeed(stationId: Int, need: Long) =
+        localDataSource.updateStationNeed(stationId, need)
+
+
+    suspend fun deleteStation() = localDataSource.deleteStations()
 }
