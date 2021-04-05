@@ -2,6 +2,7 @@ package com.path.stardelivery.ui.home.stations
 
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,6 +36,7 @@ class StationsFragment : BaseFragment<StationsViewModel, FragmentStationsBinding
             withContext(Dispatchers.Main) {
                 setSpaceshipData()
                 setStationRecyclerView()
+                setSearchQuery()
                 setCountDown()
             }
         }
@@ -44,6 +46,23 @@ class StationsFragment : BaseFragment<StationsViewModel, FragmentStationsBinding
         super.onResume()
         fetchStations()
         lifecycleScope.launch { setSpaceshipData() }
+    }
+
+    private fun setSearchQuery() {
+        viewBinding.stationSearchView.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                (viewBinding.stationsRecyclerView.adapter as? StationsAdapter)?.filter?.filter(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                (viewBinding.stationsRecyclerView.adapter as? StationsAdapter)?.filter?.filter(
+                    newText
+                )
+                return false
+            }
+        })
     }
 
     private suspend fun setSpaceshipData() {
@@ -97,7 +116,6 @@ class StationsFragment : BaseFragment<StationsViewModel, FragmentStationsBinding
     private fun canSpaceShipTravelAnyStation() = stations.any {
         spaceShipWithStation?.distanceToStation(it) ?: 0 <= spaceShipWithStation?.spaceShip?.speed ?: 0
     }
-
 
     private fun gameOver() {
         Log.i(TAG, "game over")
